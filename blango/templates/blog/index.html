@@ -3,15 +3,15 @@
 {% block content %}
     <h2>Blog Posts</h2>
     {% for post in posts %}
-    <div class="row">
+    {% row 'border-bottom' %}
         <h3>{{ post.title }}</h3>
-        <small>By {{ post.author|author_details }} on {{ post.published_at|date:'M, d Y' }}</small>
+        {% include 'blog/post-by-line.html' %}
         <p>{{ post.summary }}</p>
         <p>
             ({{ post.content|wordcount }} words)
-            <a href="#">Read More</a>
+            <a href="{% url 'blog-post-detail' post.slug %}">Read More</a>
         </p>
-    </div>
+    {% endrow %}
     {% endfor %}
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-6 bg-primary">Column 1</div>
